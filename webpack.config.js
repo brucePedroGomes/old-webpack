@@ -9,6 +9,9 @@ module.exports = {
       path: path.resolve(__dirname, "public"),
       filename: "bundle.js",
    },
+   devServer: {
+      static: path.resolve(__dirname, "public"),
+   },
    resolve: {
       extensions: [".js", ".jsx", ".json"],
    },
