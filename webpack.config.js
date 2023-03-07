@@ -4,23 +4,24 @@ const prod = process.env.NODE_ENV === "production";
 
 module.exports = {
    mode: prod ? "production" : "development",
-   entry: path.resolve(__dirname, "src", "index.js"),
+   entry: path.resolve(__dirname, "src", "index.tsx"),
    output: {
-      path: path.resolve(__dirname, "public"),
+      path: path.resolve(__dirname, prod ? "build" : "public"),
       filename: "bundle.js",
    },
+   devtool: prod ? undefined : "source-map",
    devServer: {
       static: path.resolve(__dirname, "public"),
    },
    resolve: {
-      extensions: [".js", ".jsx", ".json"],
+      extensions: [".ts", ".tsx", ".js"],
    },
    module: {
       rules: [
          {
-            test: /\.(js|jsx)$/, //kind of file extension this rule should look for and apply in test
+            test: /\.(ts|tsx)$/, //kind of file extension this rule should look for and apply in test
+            loader: "ts-loader",
             exclude: /node_modules/, //folder to be excluded
-            use: "babel-loader", //loader which we are going to use
          },
       ],
    },
